@@ -1,0 +1,136 @@
+site_name: Essensys Gateway CM5
+site_description: Documentation installation et exploitation de la Gateway Essensys (CM5 dual-NIC)
+site_author: Essensys Team
+site_url: https://essensys-hub.github.io/essensys-raspberry-gateway
+
+repo_name: essensys-hub/essensys-raspberry-gateway
+repo_url: https://github.com/essensys-hub/essensys-raspberry-gateway
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Basculer vers le mode sombre
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Basculer vers le mode clair
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+  - minify:
+      minify_html: true
+
+nav:
+  - Accueil: index.md
+  - Versions: versions.md
+  - Client iOS: client-ios.md
+  - Client Android: client-android.md
+  - Moniteur Console (HMI): monitor.md
+
+  - Installation:
+    - introduction: installation/index.md
+    - "Gateway CM5 (dual-NIC)": installation/gateway-cm5.md
+    - "Gateway CM5 — NixOS": installation/nixos-cm5.md
+    - "Préparation matérielle CM5": installation/preparation-cm5.md
+    - "Installation OS (Debian)": installation/os-installation.md
+    - "Domaine WAN": installation/wan.md
+    - "Déploiement Ansible": installation/essensys-installation.md
+    - Authentification: installation/authentication.md
+  - Guides:
+    - "Guide Utilisateur": guides/user-guide.md
+    - "Guide Administrateur": guides/admin-guide.md
+  - Connexion:
+    - connexion/index.md
+    - connexion/ssh.md
+    - connexion/configuration-reseau.md
+  - Logs:
+    - logs/index.md
+    - logs/backend.md
+    - logs/nginx.md
+    - logs/traefik.md
+  - Accès:
+    - acces/index.md
+    - acces/local.md
+    - acces/wan.md
+    - acces/portal-remote.md
+    - acces/duckdns.md
+  - Configuration Routeur:
+    - router/index.md
+    - router/ubiquiti-udm-pro.md
+    - router/freebox.md
+    - router/sfr.md
+    - router/orange-livebox.md
+  - Architecture:
+    - architecture/index.md
+    - architecture/backend.md
+    - architecture/frontend.md
+    - architecture/nginx.md
+    - architecture/traefik.md
+    - architecture/adguard.md
+    - architecture/ports.md
+  - Maintenance:
+    - maintenance/index.md
+    - maintenance/update.md
+    - maintenance/uninstall.md
+    - maintenance/troubleshooting.md
+    - maintenance/debug.md
+    - maintenance/mcp.md
+    - maintenance/cloud-sync.md
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/essensys-hub
+  version:
+    provider: mike
+    default: latest

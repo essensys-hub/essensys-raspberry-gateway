@@ -52,6 +52,18 @@ High-density IO for network integration.
   - `CM5_Stack_Top/`: Top board design (CM5 + Fan).
   - `CM5_Stack_Mid/`: Middle board design (M.2 + HDMI).
   - `CM5_Stack_Bot/`: Bottom board design (Dual Eth + USB Hub).
+- `docs/`: **Documentation MkDocs** (miroir structure [essensys-raspberry-install](https://github.com/essensys-hub/essensys-raspberry-install), adaptée Gateway CM5)
+- `nix/`: Configuration NixOS (branche `nixos`)
+- `scripts/`: Tests WAN HTTPS, utilitaires déploiement
+
+## Documentation
+
+Site en ligne : [essensys-hub.github.io/essensys-raspberry-gateway](https://essensys-hub.github.io/essensys-raspberry-gateway/)
+
+```bash
+pip install mkdocs-material mkdocs-minify-plugin mkdocs-git-revision-date-localized-plugin
+mkdocs serve   # http://127.0.0.1:8000
+```
 
 ## Manufacturing & Assembly
 
