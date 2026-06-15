@@ -56,15 +56,25 @@ Toutes servies sur `https://mon.essensys.fr/api/…` :
 | `/api/auth/*` | identity | login, OAuth Google/Apple |
 | `/api/admin/*` | admin | stats, users, newsletters |
 | `/api/mystatus` | legacy IoT | POST telemetry WAN |
+| `/api/myactions` | legacy IoT | GET ordres (`cloud_actions` par machine) |
+| `/api/done/{guid}` | legacy IoT | POST acquittement firmware |
 | `/api/serverinfos` | legacy IoT | GET indices collecte |
 
 Documentation détaillée : dépôt [essensys-user-portal-backend](https://github.com/essensys-hub/essensys-user-portal-backend/tree/main/docs).
 
 ## Nginx
 
-- **`location /api/`** → `127.0.0.1:8080` (fichier `essensys-support-site/essensys.nginx`)
+- **HTTPS `:443`** : site web + portail → `127.0.0.1:8080`
+- **HTTP `:80` (prod)** : exception firmware legacy — `/api/*` → `:8080` **sans redirect TLS** ; le reste redirige en HTTPS
+- Le firmware `BP_MQX_ETH` ne supporte pas TLS : armoires legacy en **`http://mon.essensys.fr/api/...` port 80** (DNS public → OVH)
 - **Snippet** `/etc/nginx/snippets/essensys-portal.conf` : **uniquement** `/portal/` (assets statiques)
-- **Plus de proxy** `/api/portal/` ou `/api/gateway/` vers `:8081`
+
+Vérification :
+
+```bash
+curl -sf http://mon.essensys.fr/api/serverinfos   # 200 JSON (pas de 301)
+curl -sf https://mon.essensys.fr/api/portal/health
+```
 
 En cas de 502 sur `/api/portal/*` après certbot :
 
