@@ -3,5 +3,10 @@
     "version": "nixos",
     "title": "nixos",
     "aliases": []
+  },
+  {
+    "version": "latest",
+    "title": "latest",
+    "aliases": []
   }
 ]
