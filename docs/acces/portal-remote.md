@@ -32,6 +32,10 @@ Admin → Utilisateurs :
 
 ## Fonctionnement technique
 
+!!! note "Backend consolidé (2026)"
+    Toutes les routes `/api/*` (portail, gateway, auth, admin, legacy IoT) sont servies par **`essensys-cloud-backend`** sur OVH `:8080`.  
+    Doc : [Cloud backend consolidation](cloud-backend-consolidation.md).
+
 ```mermaid
 sequenceDiagram
     participant U as Navigateur

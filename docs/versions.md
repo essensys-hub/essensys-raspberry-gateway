@@ -7,8 +7,16 @@ Documentation alignée sur [essensys-raspberry-install](https://github.com/essen
 | Version | Statut | Date | Description |
 | :--- | :--- | :--- | :--- |
 | **draft-remote** | **Brouillon** | Juin 2026 | Portail remote `mon.essensys.fr/portal/`, cloudsync HTTPS, doc gateway complète |
+| **cloud-consolidated** | **Production OVH** | Juin 2026 | Hub unique `essensys-cloud-backend` :8080, OpenSpec phases 0–7 |
 | V.1.2.2 | Dev | Jan 2026 | UniFi Protect, MCP ops |
 | V.1.1.0 | Production legacy | Jan 2026 | Redis, stack Docker |
+
+## Détails — cloud-consolidated (hub OVH unifié)
+
+- **Backend** : `essensys-user-portal-backend` → service `essensys-cloud-backend` (:8080, `CONSOLIDATED_MODE=true`)
+- **Legacy dual** : `essensys-backend` + `essensys-portal-backend` (:8081) — **arrêtés** en prod
+- **Ansible** : rôle `cloud_backend`, flags `cloud_backend_consolidated` / `cloud_backend_legacy_mode`
+- **Doc** : [Cloud backend consolidation](acces/cloud-backend-consolidation.md), [E2E](cloud-backend-consolidation-e2e.md)
 
 ## Détails — draft-remote (portail + gateway)
 

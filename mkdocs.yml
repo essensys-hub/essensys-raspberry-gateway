@@ -100,6 +100,7 @@ nav:
     - acces/local.md
     - acces/wan.md
     - acces/portal-remote.md
+    - acces/cloud-backend-consolidation.md
     - acces/duckdns.md
   - Configuration Routeur:
     - router/index.md
@@ -123,6 +124,7 @@ nav:
     - maintenance/debug.md
     - maintenance/mcp.md
     - maintenance/cloud-sync.md
+    - cloud-backend-consolidation-e2e.md
 
 extra_css:
   - stylesheets/extra.css

@@ -1,0 +1,6 @@
+# Secrets Ansible (ne jamais commiter)
+group_vars/essensys/vault.yml
+
+# macOS
+.DS_Store
+**/.DS_Store
