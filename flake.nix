@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    disko.url = "github:nix-community/disko";
 
     # Local sibling repo in dev; override with --override-input for CI
     essensys-nginx = {
@@ -15,6 +16,7 @@
     {
       self,
       nixpkgs,
+      disko,
       essensys-nginx,
       ...
     }:
@@ -33,8 +35,10 @@
         system = "aarch64-linux";
         specialArgs = { inherit essensysNginxSrc; };
         modules = [
+          disko.nixosModules.disko
           self.nixosModules.essensys-gateway
           ./nix/hosts/gateway-cm5/hardware.nix
+          ./nix/hosts/gateway-cm5/emmc-disko.nix
           ./nix/hosts/gateway-cm5/default.nix
         ];
       };

@@ -72,6 +72,7 @@ graph LR
 ### Maintenance
 - [Mise à jour](maintenance/update.md)
 - [Cloud sync / portail](maintenance/cloud-sync.md)
+- [Scénarios domotique](maintenance/scenarios.md)
 - [Dépannage](maintenance/troubleshooting.md)
 
 ### Architecture

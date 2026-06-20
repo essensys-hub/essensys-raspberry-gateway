@@ -6,9 +6,36 @@ Documentation alignée sur [essensys-raspberry-install](https://github.com/essen
 
 | Version | Statut | Date | Description |
 | :--- | :--- | :--- | :--- |
+| **V.1.4.0** | **Pilote** | Juin 2026 | Gestion scénarios (UI, API, sync cloud 591–919) |
+| **V.1.3.1** | **Pilote** | Juin 2026 | Sync cloud scheduler (profils 3 h, pull/push planifié) |
 | **draft-remote** | **Brouillon** | Juin 2026 | Portail remote `mon.essensys.fr/portal/`, cloudsync HTTPS, doc gateway complète |
 | V.1.2.2 | Dev | Jan 2026 | UniFi Protect, MCP ops |
 | V.1.1.0 | Production legacy | Jan 2026 | Redis, stack Docker |
+
+## Détails — V.1.4.0 (scénarios domotique)
+
+- **UI** : page `/scenarios` — boutons Je sors / vacances / Perso, éditeur drawer (lumières, volets, avancé)
+- **API LAN** : `GET/PUT/POST /api/scenarios/*`, `GET /api/scenarios/meta/bitmasks`
+- **API portail** : parité `/api/portal/scenarios/*` sur `mon.essensys.fr`
+- **Mode A** : lancement slot `{590: "2..8"}` sans bloc 605–622
+- **Mode B** : inchangé pour actions immédiates (`590=1` + 605–622)
+- **Sync cloud** : profil PostgreSQL **Scénarios** (591–919, `exclude_indices: [590]`, 3 h)
+- **Réglages** : toggle « Synchroniser les scénarios » → `PUT /api/admin/scenarios/sync`
+- **Tests E2E** : `essensys-server-backend/test/test_scenarios_e2e.sh`, `test_scenarios_cloud_parity.sh`
+
+> Voir [Scénarios](maintenance/scenarios.md) et OpenSpec `essensys-scenario-management`.
+
+## Détails — V.1.3.1 (sync cloud scheduler)
+
+- **Scheduler** : `internal/cloudsync` poll `GET /api/gateway/sync-config`, exécute profils PostgreSQL (défaut **3 h**)
+- **Pull** : `ExchangePullScheduler` — rotation serverinfos ≤30 indices/cycle firmware
+- **Push** : `POST /api/gateway/exchange` merge OVH ; fallback `exchangePushIndices()` si pas de profils
+- **LAN admin** : `GET /api/admin/cloudsync/status`, sync manuelle `/api/admin/heating/sync`
+- **UI locale** : Paramètres → Synchronisation ; Chauffage → Sync armoire
+- **Config** : `cloud.scheduled_sync_enabled: true` (Ansible `cloud_scheduled_sync_enabled`)
+- **Build CM5** : `CGO_ENABLED=0 go build` (binaire statique pour image Alpine)
+
+> Voir [Cloud sync](maintenance/cloud-sync.md) et OpenSpec `essensys-cloud-sync-scheduler`.
 
 ## Détails — draft-remote (portail + gateway)
 

@@ -6,7 +6,10 @@
   ...
 }:
 {
-  imports = [ (modulesPath + "/profiles/minimal.nix") ];
+  imports = [
+    (modulesPath + "/profiles/minimal.nix")
+    ./hardware-cm5.generated.nix
+  ];
 
   boot.loader.grub.enable = false;
 
@@ -51,6 +54,21 @@
   networking.hostName = "essensys-gateway";
 
   services.openssh.enable = true;
+
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPNEyP1+K6ieKTFxgxu0VedxZbByRUpw1vHjnyujyo/8 nrineau@Nicolass-Mac-mini.local"
+  ];
+
+  users.users.essensys = {
+    isNormalUser = true;
+    group = "essensys";
+    extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPNEyP1+K6ieKTFxgxu0VedxZbByRUpw1vHjnyujyo/8 nrineau@Nicolass-Mac-mini.local"
+    ];
+  };
+
+  security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
     curl
